@@ -1,0 +1,65 @@
+env:
+    contexts:
+        - authentication: {}
+          excludePaths: []
+          includePaths:
+            - http://localhost:5000/.*
+            - http://localhost:5000/*
+          name: Default Context
+          sessionManagement:
+            method: cookie
+            parameters: {}
+          technology:
+            exclude: []
+          urls:
+            - http://localhost:5000/
+          users: []
+    parameters:
+        failOnError: true
+        failOnWarning: false
+        progressToStdout: true
+    vars: {}
+jobs:
+    - name: passiveScan-config
+      parameters:
+        enableTags: false
+        maxAlertsPerRule: 0
+        maxBodySizeInBytesToScan: 0
+        scanOnlyInScope: true
+      rules: []
+      type: passiveScan-config
+    - name: openapi
+      parameters:
+        apiFile: /demo/openapi.json
+        apiUrl: ""
+        context: Default Context
+        targetUrl: https://49ff-218-48-189-21.ngrok-free.app
+      type: openapi
+    - name: passiveScan-wait
+      parameters: {}
+      type: passiveScan-wait
+    - name: activeScan
+      parameters:
+        addQueryParam: false
+        context: Default Context
+        delayInMs: 0
+        handleAntiCSRFTokens: false
+        injectPluginIdInHeader: false
+        maxRuleDurationInMins: 0
+        maxScanDurationInMins: 0
+        policy: ""
+        scanHeadersAllRequests: false
+        threadPerHost: 10
+      policyDefinition:
+        defaultStrength: medium
+        defaultThreshold: medium
+        rules: []
+      type: activeScan
+    - name: report
+      parameters:
+        reportDescription: ""
+        reportDir: /demo/test_output/dast-output-826580319
+        reportFile: ZAP-Report
+        reportTitle: ZAP Scanning Report
+        template: traditional-json-plus
+      type: report
