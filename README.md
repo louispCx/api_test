@@ -1,5 +1,5 @@
 # sanity-scan
- 
+  
 ## Prerequisite
 - java 11
 
