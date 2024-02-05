@@ -16,7 +16,7 @@ curl --location --request POST 'http://localhost:8080/user/insert' \
     "info": "something funny"
     
 }'
-```
+``` 
 ### Example 2
 Request
 ```
